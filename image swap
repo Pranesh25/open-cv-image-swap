@@ -1,0 +1,149 @@
+import cv2
+import numpy as np
+
+
+
+
+photo=np.zeros((600,600,3))
+
+
+
+
+
+photo.shape
+
+
+# # CREATING OUR OWN IMAGE
+
+
+
+
+#head
+cv2.circle(photo, center=(300,75), radius=75, color=(255,255,255), thickness=3)
+#left eye
+cv2.circle(photo ,center=(270,50) , radius=10,color=(10,20,30),thickness=2)
+#right eye
+cv2.circle(photo ,center=(330,50) , radius=10,color=(10,20,30),thickness=2)
+#nose
+photo[70:100, 300:305]=[255,255,255]
+#mouth
+cv2.ellipse(photo,(302,110),(30,30),0,0,180,320,-1)
+
+#neck
+photo[150:190, 300:310]=[0,255,0]
+#chest
+photo[190:400, 235:375]=[0,0,255]
+#left_hand
+photo[190:200, 80:235]=[0,255,255]
+#right hand
+photo[190:200, 375:530]=[0,255,255]
+#left leg
+photo[400:550, 250:270]=[0,255,255]
+#right leg
+photo[400:550, 330:350]=[0,255,255]
+
+cv2.imshow("photo",photo)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+# # CROP SOME PART OF TWO IMAGES AND SWAP IT
+
+
+
+
+
+img1=cv2.imread("tiger.jpg")
+img2=cv2.imread("nature.jpg")
+cv2.imshow('img1',img1)
+cv2.imshow('img2',img2)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+
+img1.shape
+
+
+
+
+
+img22=cv2.imread('nature.jpg')
+
+
+
+
+
+img2.shape
+
+
+
+
+
+img11=img1[0:400, 100:700]
+cv2.imshow('Cropped Image 1',img11)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+img2[200:600, 100:700]=img11
+cv2.imshow('swaping1',img2)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+
+img21=img22[0:400, 100:700]
+cv2.imshow('Cropped Image 2',img21)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+
+img1[200:600, 100:700]=img21
+cv2.imshow('swaping2',img1)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+# #  TAKING 2 IMAGE AND COMBINING IT TO FORM SINGLE IMAGE
+
+
+
+
+img01=cv2.imread("tiger.jpg")
+img02=cv2.imread("nature.jpg")
+
+print(img01.shape)
+print(img02.shape)
+
+
+
+
+
+img02=img02[0:600, 0:800]
+hor=np.hstack((img01,img02))
+
+cv2.imshow("Horizontal Collage", hor)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+
+
+img01=img01[0:400, 0:600]
+img02=img02[0:400, 0:600]
+
+ver=np.vstack((img01,img02))
+cv2.imshow("Vertical Collage", ver)
+cv2.waitKey()
+cv2.destroyAllWindows()
